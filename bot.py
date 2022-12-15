@@ -12,6 +12,10 @@ dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
 day_for_school = 1 # Учебный день (будет менятся ежедневно)
 
+WEBHOOK_HOST = 'https://lesson-a9av.onrender.com'
+WEBHOOK_PATH = 'https://api.render.com/deploy/srv-cedm6ssgqg45htai72h0?key=iJvvyJAX_wc' #или пустое значение, если он слушает на стартовой странице.
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+
 def seconds():
     while True:
         global day_for_school
@@ -445,5 +449,16 @@ async def otvet(message: types.Message, state: FSMContext):
 
 threading.Thread(target=seconds).start()
 
+WEBHOOK_HOST = 'https://lesson-a9av.onrender.com'
+WEBHOOK_PATH = 'https://api.render.com/deploy/srv-cedm6ssgqg45htai72h0?key=iJvvyJAX_wc' #или пустое значение, если он слушает на стартовой странице.
+WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
+WEBAPP_HOST = 'localhost'  # or ip
+WEBAPP_PORT = 3001
+
 if __name__ == '__main__':
-    executor.start_polling(dp)
+    executor.start_webhook(dispatcher=dp,
+                           webhook_path=WEBHOOK_PATH,
+                           skip_updates=True,
+                           host=WEBAPP_HOST,
+                           port=WEBAPP_PORT,
+                           )
