@@ -1,0 +1,169 @@
+Index: bot.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from aiogram import Bot, executor, Dispatcher, types\r\nfrom lessons_button import *\r\nimport datetime\r\n\r\nbot = Bot('BOT_TOKEN') # Бот токен\r\ndp = Dispatcher(bot) # Создание Диспетчера\r\n\r\nday_for_school = 1 # Учебный день (будет менятся ежедневно)\r\n\r\n@dp.message_handler(commands=(['start']))\r\nasync def menu(message: types.Message):\r\n    await message.answer(text=f'ты уже корячешься в этой школе {day_for_school} дней', reply_markup=update_date_keyborard)\r\n\r\n@dp.message_handler()\r\nasync def lessons_day(message: types.Message):\r\n    if message.text == 'География' and day_for_school == 1:\r\n        await message.answer('запиши домашнее задание ')\r\n\r\n\r\n\r\nif __name__ == '__main__':\r\n    executor.start_polling(dp)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bot.py b/bot.py
+--- a/bot.py	(revision 7c435a60e7f0f8b316e05d2ccf400b89cc852eca)
++++ b/bot.py	(date 1671108938703)
+@@ -1,20 +1,32 @@
+ from aiogram import Bot, executor, Dispatcher, types
+ from lessons_button import *
+ import datetime
++from aiogram.dispatcher.filters.state import State, StatesGroup
++
+ 
+ bot = Bot('BOT_TOKEN') # Бот токен
+ dp = Dispatcher(bot) # Создание Диспетчера
+ 
+ day_for_school = 1 # Учебный день (будет менятся ежедневно)
++class homework(StatesGroup):
++    frs = first(State)
+ 
+ @dp.message_handler(commands=(['start']))
+ async def menu(message: types.Message):
+     await message.answer(text=f'ты уже корячешься в этой школе {day_for_school} дней', reply_markup=update_date_keyborard)
+ 
+-@dp.message_handler()
+-async def lessons_day(message: types.Message):
+-    if message.text == 'География' and day_for_school == 1:
+-        await message.answer('запиши домашнее задание ')
++
++@dp.message_handler(command=(['12345']), state=None)
++async def firstss(message: types.Message):
++    await message.answer('12345 ответ')
++    await homework.frs.set()
++
++
++
++# @dp.message_handler()
++# async def lessons_day(message: types.Message):
++#     if message.text == 'География' and day_for_school == 1:
++#         await message.answer('запиши домашнее задание ')
+ 
+ 
+ 
+Index: FSM.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/FSM.py b/FSM.py
+new file mode 100644
+--- /dev/null	(date 1671107863828)
++++ b/FSM.py	(date 1671107863828)
+@@ -0,0 +1,4 @@
++from aiogram.dispatcher.filters.state import State, StatesGroup
++
++class homework(StatesGroup):
++    frs = first(State)
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Is7xR3kOxBHJXWHmbJzcRvzwU4\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n      <created>1670958683089</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670958683089</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 7c435a60e7f0f8b316e05d2ccf400b89cc852eca)
++++ b/.idea/workspace.xml	(date 1671109026721)
+@@ -1,27 +1,48 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="" />
++    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="Добавление Команды">
++      <change afterPath="$PROJECT_DIR$/FSM.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
+   </component>
+   <component name="Git.Settings">
++    <option name="PUSH_AUTO_UPDATE" value="true" />
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2Is7xR3kOxBHJXWHmbJzcRvzwU4" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true"
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+   }
+ }]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+@@ -33,6 +54,44 @@
+       <option name="presentableId" value="Default" />
+       <updated>1670958683089</updated>
+     </task>
++    <task id="LOCAL-00001" summary="Добавление Команды">
++      <created>1670962491807</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1670962491807</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Добавление Команды">
++      <created>1670962997390</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1670962997390</updated>
++    </task>
++    <task id="LOCAL-00003" summary="Добавление Команды">
++      <created>1671107085009</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1671107085009</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="Добавление Команды" />
++    <option name="LAST_COMMIT_MESSAGE" value="Добавление Команды" />
++  </component>
+ </project>
+\ No newline at end of file

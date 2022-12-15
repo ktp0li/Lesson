@@ -1,0 +1,69 @@
+Index: мэин.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from aiogram import types, executor, Dispatcher, Bot\r\nfrom aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton\r\n\r\n\r\nbot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448')\r\ndp = Dispatcher(bot)\r\n\r\n# 12342\r\n\r\n\r\nstart_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\nstart_button1 = KeyboardButton(text='Первый юрыль')\r\nstart_button2 = KeyboardButton(text='Второй кульбэк')\r\nstart_keyboard.add(start_button1, start_button2)\r\n\r\nurlkeyboard = InlineKeyboardMarkup(row_width=1)\r\ngoogle_inline_button = InlineKeyboardButton(text='гулугуле', url='https://www.google.ru/')\r\nyandex_inline_button = InlineKeyboardButton(text='великий и не повторимый', url='https://ya.ru/')\r\nurlkeyboard.add(google_inline_button, yandex_inline_button)\r\n\r\ncallback_inline_keyboard = InlineKeyboardMarkup(row_width=1)\r\nfirst_callback = InlineKeyboardButton(text='Ну тут выбор очевиден', callback_data='он выбрал это')\r\ncallback_inline_keyboard.add(first_callback)\r\n\r\n@dp.message_handler(commands=(['start']))\r\nasync def start(message: types.Message):\r\n    await message.answer('Начало', reply_markup=start_keyboard)\r\n\r\n@dp.message_handler()\r\nasync def body(message: types.Message):\r\n    if message.text == 'Первый юрыль':\r\n        await message.answer(text='Выбор за тобой', reply_markup=urlkeyboard)\r\n    elif message.text == 'Второй кульбэк':\r\n        await message.answer(text='Жми сук', reply_markup=callback_inline_keyboard)\r\n    else:\r\n        await message.answer(text='МЕНЯЙ СУК')\r\n\r\n@dp.callback_query_handler()\r\nasync def onecall(callback: types.CallbackQuery):\r\n    if callback.data == 'он выбрал это':\r\n        await callback.answer(text='12345')\r\n# https://api.telegram.org/bot5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448/setWebhook?url=http://dmitrii1101.pythonanywhere.com/\r\n\r\nif __name__ == '__main__':\r\n    executor.start_webhook(dispatcher=dp, webhook_url='http://dmitrii1101.pythonanywhere.com/webhook/5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448',\r\n                           webhook_path='5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448',\r\n                           webhook_host='http://dmitrii1101.pythonanywhere.com/',\r\n                           host='0.0.0.0',\r\n                           port='8000'\r\n                           )
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/мэин.py b/мэин.py
+--- a/мэин.py	(revision e9af908e2fecbbee272289ef2316558231cb7ff5)
++++ b/мэин.py	(date 1670962521805)
+@@ -5,7 +5,7 @@
+ bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448')
+ dp = Dispatcher(bot)
+ 
+-# 12342
++
+ 
+ 
+ start_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Is7xR3kOxBHJXWHmbJzcRvzwU4\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n      <created>1670958683089</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670958683089</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision fe87728fbe0211506a4935dccb7ea3751e29c755)
++++ b/.idea/workspace.xml	(date 1670962408776)
+@@ -1,7 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="" />
++    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="Добавление Команды">
++      <change beforePath="$PROJECT_DIR$/мэин.py" beforeDir="false" afterPath="$PROJECT_DIR$/мэин.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -9,6 +14,7 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -18,12 +24,12 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">

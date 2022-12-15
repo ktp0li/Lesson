@@ -1,0 +1,334 @@
+Index: bot.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from aiogram import Bot, executor, Dispatcher, types\r\nfrom aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup\r\nimport datetime\r\n\r\nbot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен\r\ndp = Dispatcher(bot) # Создание Диспетчера\r\n\r\nday_for_school = 1 # Учебный день (будет менятся ежедневно)\r\n\r\n\r\nupdate_date_keyborard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\nupdate_button = KeyboardButton('Обновить')\r\nupdate_date_keyborard.add(update_button)\r\n\r\nmonday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) # расписание на понедельник\r\none_monday_lesson = KeyboardButton(text='Чил и Каеф')\r\ntwo_monday_lesson = KeyboardButton(text='Астрономия')\r\nthree_monday_lesson = KeyboardButton(text='География')\r\nfour_monday_lesson = KeyboardButton(text='Химия')\r\nfive_monday_lesson = KeyboardButton(text='Шведский')\r\nsix_monday_lesson = KeyboardButton(text='Английский')\r\nadditionally_monday_lesson = KeyboardButton(text='Доп. Русский')\r\nmonday_keyboard.add(one_monday_lesson, two_monday_lesson, three_monday_lesson, four_monday_lesson, five_monday_lesson, six_monday_lesson, additionally_monday_lesson)\r\n\r\n\r\ntuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\none_tuesday_lesson = KeyboardButton(text='Обществознание')\r\ntwo_tuesday_lesson = KeyboardButton(text='Литра')\r\nthree_tuesday_lesson = KeyboardButton(text='Литра')\r\nfour_tuesday_lesson = KeyboardButton(text='Обществознание')\r\nfive_tuesday_lesson = KeyboardButton(text='Геометрия')\r\nsix_tuesday_lesson = KeyboardButton(text='Английский')\r\nseven_tuesday_lesson = KeyboardButton(text='Английский')\r\ntuesday_keyboard.add(one_tuesday_lesson, two_tuesday_lesson, three_tuesday_lesson, four_tuesday_lesson, five_tuesday_lesson, six_tuesday_lesson, seven_tuesday_lesson)\r\n\r\n\r\nwednesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\none_wednesday_lesson = KeyboardButton(text='Алгебра')\r\ntwo_wednesday_lesson = KeyboardButton(text='Английский')\r\nthree_wednesday_lesson = KeyboardButton(text='Русский Язык')\r\nfour_wednesday_lesson = KeyboardButton(text='Русский Язык')\r\nfive_wednesday_lesson = KeyboardButton(text='Шведский')\r\nsix_wednesday_lesson = KeyboardButton(text='Физика')\r\nseven_wednesday_lesson = KeyboardButton(text='Физра')\r\nwednesday_keyboard.add(one_wednesday_lesson, two_wednesday_lesson, three_wednesday_lesson, four_wednesday_lesson, five_wednesday_lesson, six_wednesday_lesson, seven_wednesday_lesson)\r\n\r\n\r\nthursday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\none_thursday_lesson = KeyboardButton(text='Физра')\r\ntwo_thursday_lesson = KeyboardButton(text='История')\r\nthree_thursday_lesson = KeyboardButton(text='Английский')\r\nfour_thursday_lesson = KeyboardButton(text='Шведский')\r\nfive_thursday_lesson = KeyboardButton(text='ОБЖ')\r\nsix_thursday_lesson = KeyboardButton(text='Физика')\r\nadditionally_thursday_lesson = KeyboardButton(text='Доп. Информатика')\r\nthursday_keyboard.add(one_thursday_lesson, two_thursday_lesson, three_thursday_lesson, four_thursday_lesson, five_thursday_lesson, six_thursday_lesson)\r\n\r\n\r\nfriday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\none_friday_lesson = KeyboardButton(text='Индивидуальный проект')\r\ntwo_friday_lesson = KeyboardButton(text='Алгебра (Электив)')\r\nthree_friday_lesson = KeyboardButton(text='Обществознание')\r\nfour_friday_lesson = KeyboardButton(text='Обществознание')\r\nfive_friday_lesson = KeyboardButton(text='Алгебра')\r\nsix_friday_lesson = KeyboardButton(text='Информатика')\r\nfriday_keyboard.add(one_friday_lesson, two_friday_lesson, three_friday_lesson, four_friday_lesson, five_friday_lesson, six_friday_lesson)\r\n\r\n\r\nsaturday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)\r\none_saturday_lesson = KeyboardButton(text='Русский Язык')\r\ntwo_saturday_lesson = KeyboardButton(text='Литература')\r\nthree_saturday_lesson = KeyboardButton(text='Геометрия')\r\nfour_saturday_lesson = KeyboardButton(text='Биология')\r\nfive_saturday_lesson = KeyboardButton(text='Английский')\r\nsix_saturday_lesson = KeyboardButton(text='Физра')\r\nsaturday_keyboard.add(one_saturday_lesson, two_saturday_lesson, three_saturday_lesson, four_saturday_lesson, five_saturday_lesson, six_saturday_lesson)\r\n\r\n\r\n\r\n\r\n\r\n\r\n@dp.message_handler(commands=(['start']))\r\nasync def menu(message: types.Message):\r\n    await message.answer(text=f'ты уже корячешься в этой школе {day_for_school} дней', reply_markup=update_date_keyborard)\r\n\r\n@dp.message_handler()\r\nasync def lessons_day(message: types.Message):\r\n    if message.text == 'География' and day_for_school == 1:\r\n        await message.answer('запиши домашнее задание ')\r\n\r\n\r\n\r\nif __name__ == '__main__':\r\n    executor.start_polling(dp)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/bot.py b/bot.py
+--- a/bot.py	(revision e0f087967ea5264b1cd448e87d0e73cc68e898c3)
++++ b/bot.py	(date 1671085415373)
+@@ -1,84 +1,20 @@
+ from aiogram import Bot, executor, Dispatcher, types
+-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
++from lessons_button import *
++from aiogram.dispatcher.filters.state import StatesGroup, State
+ import datetime
+ 
++class DZ(StatesGroup):
++    first = State()
++    second = State()
++
++
++
+ bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен
+ dp = Dispatcher(bot) # Создание Диспетчера
+ 
+ day_for_school = 1 # Учебный день (будет менятся ежедневно)
+ 
+ 
+-update_date_keyborard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-update_button = KeyboardButton('Обновить')
+-update_date_keyborard.add(update_button)
+-
+-monday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) # расписание на понедельник
+-one_monday_lesson = KeyboardButton(text='Чил и Каеф')
+-two_monday_lesson = KeyboardButton(text='Астрономия')
+-three_monday_lesson = KeyboardButton(text='География')
+-four_monday_lesson = KeyboardButton(text='Химия')
+-five_monday_lesson = KeyboardButton(text='Шведский')
+-six_monday_lesson = KeyboardButton(text='Английский')
+-additionally_monday_lesson = KeyboardButton(text='Доп. Русский')
+-monday_keyboard.add(one_monday_lesson, two_monday_lesson, three_monday_lesson, four_monday_lesson, five_monday_lesson, six_monday_lesson, additionally_monday_lesson)
+-
+-
+-tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-one_tuesday_lesson = KeyboardButton(text='Обществознание')
+-two_tuesday_lesson = KeyboardButton(text='Литра')
+-three_tuesday_lesson = KeyboardButton(text='Литра')
+-four_tuesday_lesson = KeyboardButton(text='Обществознание')
+-five_tuesday_lesson = KeyboardButton(text='Геометрия')
+-six_tuesday_lesson = KeyboardButton(text='Английский')
+-seven_tuesday_lesson = KeyboardButton(text='Английский')
+-tuesday_keyboard.add(one_tuesday_lesson, two_tuesday_lesson, three_tuesday_lesson, four_tuesday_lesson, five_tuesday_lesson, six_tuesday_lesson, seven_tuesday_lesson)
+-
+-
+-wednesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-one_wednesday_lesson = KeyboardButton(text='Алгебра')
+-two_wednesday_lesson = KeyboardButton(text='Английский')
+-three_wednesday_lesson = KeyboardButton(text='Русский Язык')
+-four_wednesday_lesson = KeyboardButton(text='Русский Язык')
+-five_wednesday_lesson = KeyboardButton(text='Шведский')
+-six_wednesday_lesson = KeyboardButton(text='Физика')
+-seven_wednesday_lesson = KeyboardButton(text='Физра')
+-wednesday_keyboard.add(one_wednesday_lesson, two_wednesday_lesson, three_wednesday_lesson, four_wednesday_lesson, five_wednesday_lesson, six_wednesday_lesson, seven_wednesday_lesson)
+-
+-
+-thursday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-one_thursday_lesson = KeyboardButton(text='Физра')
+-two_thursday_lesson = KeyboardButton(text='История')
+-three_thursday_lesson = KeyboardButton(text='Английский')
+-four_thursday_lesson = KeyboardButton(text='Шведский')
+-five_thursday_lesson = KeyboardButton(text='ОБЖ')
+-six_thursday_lesson = KeyboardButton(text='Физика')
+-additionally_thursday_lesson = KeyboardButton(text='Доп. Информатика')
+-thursday_keyboard.add(one_thursday_lesson, two_thursday_lesson, three_thursday_lesson, four_thursday_lesson, five_thursday_lesson, six_thursday_lesson)
+-
+-
+-friday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-one_friday_lesson = KeyboardButton(text='Индивидуальный проект')
+-two_friday_lesson = KeyboardButton(text='Алгебра (Электив)')
+-three_friday_lesson = KeyboardButton(text='Обществознание')
+-four_friday_lesson = KeyboardButton(text='Обществознание')
+-five_friday_lesson = KeyboardButton(text='Алгебра')
+-six_friday_lesson = KeyboardButton(text='Информатика')
+-friday_keyboard.add(one_friday_lesson, two_friday_lesson, three_friday_lesson, four_friday_lesson, five_friday_lesson, six_friday_lesson)
+-
+-
+-saturday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-one_saturday_lesson = KeyboardButton(text='Русский Язык')
+-two_saturday_lesson = KeyboardButton(text='Литература')
+-three_saturday_lesson = KeyboardButton(text='Геометрия')
+-four_saturday_lesson = KeyboardButton(text='Биология')
+-five_saturday_lesson = KeyboardButton(text='Английский')
+-six_saturday_lesson = KeyboardButton(text='Физра')
+-saturday_keyboard.add(one_saturday_lesson, two_saturday_lesson, three_saturday_lesson, four_saturday_lesson, five_saturday_lesson, six_saturday_lesson)
+-
+-
+-
+-
+-
+ 
+ @dp.message_handler(commands=(['start']))
+ async def menu(message: types.Message):
+Index: мэин.py
+===================================================================
+diff --git a/мэин.py b/мэин.py
+deleted file mode 100644
+--- a/мэин.py	(revision e0f087967ea5264b1cd448e87d0e73cc68e898c3)
++++ /dev/null	(revision e0f087967ea5264b1cd448e87d0e73cc68e898c3)
+@@ -1,50 +0,0 @@
+-from aiogram import types, executor, Dispatcher, Bot
+-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
+-
+-
+-bot = Bot('TOKEN')
+-dp = Dispatcher(bot)
+-
+-# 1212121212
+-
+-
+-start_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+-start_button1 = KeyboardButton(text='Первый юрыль')
+-start_button2 = KeyboardButton(text='Второй кульбэк')
+-start_keyboard.add(start_button1, start_button2)
+-
+-urlkeyboard = InlineKeyboardMarkup(row_width=1)
+-google_inline_button = InlineKeyboardButton(text='гулугуле', url='https://www.google.ru/')
+-yandex_inline_button = InlineKeyboardButton(text='великий и не повторимый', url='https://ya.ru/')
+-urlkeyboard.add(google_inline_button, yandex_inline_button)
+-
+-callback_inline_keyboard = InlineKeyboardMarkup(row_width=1)
+-first_callback = InlineKeyboardButton(text='Ну тут выбор очевиден', callback_data='он выбрал это')
+-callback_inline_keyboard.add(first_callback)
+-
+-@dp.message_handler(commands=(['start']))
+-async def start(message: types.Message):
+-    await message.answer('Начало', reply_markup=start_keyboard)
+-
+-@dp.message_handler()
+-async def body(message: types.Message):
+-    if message.text == 'Первый юрыль':
+-        await message.answer(text='Выбор за тобой', reply_markup=urlkeyboard)
+-    elif message.text == 'Второй кульбэк':
+-        await message.answer(text='Жми сук', reply_markup=callback_inline_keyboard)
+-    else:
+-        await message.answer(text='МЕНЯЙ СУК')
+-
+-@dp.callback_query_handler()
+-async def onecall(callback: types.CallbackQuery):
+-    if callback.data == 'он выбрал это':
+-        await callback.answer(text='12345')
+-# https://api.telegram.org/bot5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448/setWebhook?url=http://dmitrii1101.pythonanywhere.com/
+-
+-if __name__ == '__main__':
+-    executor.start_webhook(dispatcher=dp, webhook_url='http://dmitrii1101.pythonanywhere.com/webhook/5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448',
+-                           webhook_path='5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448',
+-                           webhook_host='http://dmitrii1101.pythonanywhere.com/',
+-                           host='0.0.0.0',
+-                           port='8000'
+-                           )
+Index: lessons_button.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lessons_button.py b/lessons_button.py
+new file mode 100644
+--- /dev/null	(date 1671085415389)
++++ b/lessons_button.py	(date 1671085415389)
+@@ -0,0 +1,72 @@
++from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
++
++update_date_keyborard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++update_button = KeyboardButton('Обновить')
++update_date_keyborard.add(update_button)
++
++
++
++
++
++monday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) # расписание на понедельник
++one_monday_lesson = KeyboardButton(text='Чил и Каеф')
++two_monday_lesson = KeyboardButton(text='Астрономия')
++three_monday_lesson = KeyboardButton(text='География')
++four_monday_lesson = KeyboardButton(text='Химия')
++five_monday_lesson = KeyboardButton(text='Шведский')
++six_monday_lesson = KeyboardButton(text='Английский')
++additionally_monday_lesson = KeyboardButton(text='Доп. Русский')
++monday_keyboard.add(one_monday_lesson, two_monday_lesson, three_monday_lesson, four_monday_lesson, five_monday_lesson, six_monday_lesson, additionally_monday_lesson)
++
++
++tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++one_tuesday_lesson = KeyboardButton(text='Обществознание')
++two_tuesday_lesson = KeyboardButton(text='Литра')
++three_tuesday_lesson = KeyboardButton(text='Литра')
++four_tuesday_lesson = KeyboardButton(text='Обществознание')
++five_tuesday_lesson = KeyboardButton(text='Геометрия')
++six_tuesday_lesson = KeyboardButton(text='Английский')
++seven_tuesday_lesson = KeyboardButton(text='Английский')
++tuesday_keyboard.add(one_tuesday_lesson, two_tuesday_lesson, three_tuesday_lesson, four_tuesday_lesson, five_tuesday_lesson, six_tuesday_lesson, seven_tuesday_lesson)
++
++
++wednesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++one_wednesday_lesson = KeyboardButton(text='Алгебра')
++two_wednesday_lesson = KeyboardButton(text='Английский')
++three_wednesday_lesson = KeyboardButton(text='Русский Язык')
++four_wednesday_lesson = KeyboardButton(text='Русский Язык')
++five_wednesday_lesson = KeyboardButton(text='Шведский')
++six_wednesday_lesson = KeyboardButton(text='Физика')
++seven_wednesday_lesson = KeyboardButton(text='Физра')
++wednesday_keyboard.add(one_wednesday_lesson, two_wednesday_lesson, three_wednesday_lesson, four_wednesday_lesson, five_wednesday_lesson, six_wednesday_lesson, seven_wednesday_lesson)
++
++
++thursday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++one_thursday_lesson = KeyboardButton(text='Физра')
++two_thursday_lesson = KeyboardButton(text='История')
++three_thursday_lesson = KeyboardButton(text='Английский')
++four_thursday_lesson = KeyboardButton(text='Шведский')
++five_thursday_lesson = KeyboardButton(text='ОБЖ')
++six_thursday_lesson = KeyboardButton(text='Физика')
++additionally_thursday_lesson = KeyboardButton(text='Доп. Информатика')
++thursday_keyboard.add(one_thursday_lesson, two_thursday_lesson, three_thursday_lesson, four_thursday_lesson, five_thursday_lesson, six_thursday_lesson)
++
++
++friday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++one_friday_lesson = KeyboardButton(text='Индивидуальный проект')
++two_friday_lesson = KeyboardButton(text='Алгебра (Электив)')
++three_friday_lesson = KeyboardButton(text='Обществознание')
++four_friday_lesson = KeyboardButton(text='Обществознание')
++five_friday_lesson = KeyboardButton(text='Алгебра')
++six_friday_lesson = KeyboardButton(text='Информатика')
++friday_keyboard.add(one_friday_lesson, two_friday_lesson, three_friday_lesson, four_friday_lesson, five_friday_lesson, six_friday_lesson)
++
++
++saturday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
++one_saturday_lesson = KeyboardButton(text='Русский Язык')
++two_saturday_lesson = KeyboardButton(text='Литература')
++three_saturday_lesson = KeyboardButton(text='Геометрия')
++four_saturday_lesson = KeyboardButton(text='Биология')
++five_saturday_lesson = KeyboardButton(text='Английский')
++six_saturday_lesson = KeyboardButton(text='Физра')
++saturday_keyboard.add(one_saturday_lesson, two_saturday_lesson, three_saturday_lesson, four_saturday_lesson, five_saturday_lesson, six_saturday_lesson)
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Is7xR3kOxBHJXWHmbJzcRvzwU4\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9bafcec8-3a72-4c54-9fb3-999d8ac32028\" name=\"Changes\" comment=\"\" />\r\n      <created>1670958683089</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1670958683089</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e0f087967ea5264b1cd448e87d0e73cc68e898c3)
++++ b/.idea/workspace.xml	(date 1670963928296)
+@@ -1,27 +1,51 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="" />
++    <list default="true" id="9bafcec8-3a72-4c54-9fb3-999d8ac32028" name="Changes" comment="Добавление Команды">
++      <change afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/procfile" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/saas.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/мэин.py" beforeDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
++  </component>
+   <component name="Git.Settings">
++    <option name="PUSH_AUTO_UPDATE" value="true" />
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2Is7xR3kOxBHJXWHmbJzcRvzwU4" />
++  <component name="ProjectLevelVcsManager">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true"
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "settings.editor.selected.configurable": "vcs.Git"
+   }
+ }]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+@@ -33,6 +57,26 @@
+       <option name="presentableId" value="Default" />
+       <updated>1670958683089</updated>
+     </task>
++    <task id="LOCAL-00001" summary="Добавление Команды">
++      <created>1670962491807</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1670962491807</updated>
++    </task>
++    <task id="LOCAL-00002" summary="Добавление Команды">
++      <created>1670962997390</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1670962997390</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
++  <component name="VcsManagerConfiguration">
++    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
++    <MESSAGE value="Добавление Команды" />
++    <option name="LAST_COMMIT_MESSAGE" value="Добавление Команды" />
++  </component>
+ </project>
+\ No newline at end of file
