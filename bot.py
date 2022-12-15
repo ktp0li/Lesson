@@ -6,7 +6,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import time
 import threading
 
-bot = Bot('ыуаыуауыа') # Бот токен
+bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
