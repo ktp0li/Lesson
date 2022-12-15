@@ -145,7 +145,59 @@ async def lessons_day(message: types.Message, state=None):
     elif message.text == 'Английский' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
         await homework.angl6.set()
-
+    elif message.text == 'Обновить':
+        if day_for_school == 1:
+            await message.answer('''Расписание на понедельник
+            Чил и Каеф
+            Астрономия
+            География
+            Химия
+            Шведский
+            Английский
+            Доп. Русский''', reply_markup=monday_keyboard)
+        if day_for_school == 2:
+            await message.answer('''Расписание на вторник
+            История
+            Литература
+            Литература
+            История
+            Геометрия
+            Английский
+            Английский''', reply_markup=tuesday_keyboard)
+        if day_for_school == 3:
+            await message.answer('''Расписание на среду
+            Алгебра
+            Английский
+            Русский Язык
+            Русский Язык
+            Шведский
+            Физика
+            Физра''', reply_markup=wednesday_keyboard)
+        if day_for_school == 4:
+            await message.answer('''Расписание на четверг
+            Физра
+            История
+            Английский
+            Шведский
+            ОБЖ
+            Физика
+            Доп. Информатика''', reply_markup=thursday_keyboard)
+        if day_for_school == 5:
+            await message.answer('''Расписание на пятницу
+            Индивидульный проект
+            Алгебра
+            Обществознание
+            Обществознание
+            Алгебра
+            Информатика''', reply_markup=friday_keyboard)
+        if day_for_school == 6:
+            await message.answer('''Расписание на субботу
+            Русский Язык
+            Литература
+            Геометрия
+            Биология
+            Английский
+            Физра''', reply_markup=saturday_keyboard)
 
 
 @dp.message_handler(state=homework.geog1)
@@ -449,16 +501,7 @@ async def otvet(message: types.Message, state: FSMContext):
 
 threading.Thread(target=seconds).start()
 
-WEBHOOK_HOST = 'https://lesson-a9av.onrender.com'
-WEBHOOK_PATH = 'https://api.render.com/deploy/srv-cedm6ssgqg45htai72h0?key=iJvvyJAX_wc' #или пустое значение, если он слушает на стартовой странице.
-WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
-WEBAPP_HOST = 'localhost'  # or ip
-WEBAPP_PORT = 3001
+
 
 if __name__ == '__main__':
-    executor.start_webhook(dispatcher=dp,
-                           webhook_path=WEBHOOK_PATH,
-                           skip_updates=True,
-                           host=WEBAPP_HOST,
-                           port=WEBAPP_PORT,
-                           )
+    executor.start_polling(dispatcher=dp)
