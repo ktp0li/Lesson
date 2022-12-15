@@ -10,7 +10,7 @@ bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
-day_for_school = 1 # Учебный день (будет менятся ежедневно)
+day_for_school = 2 # Учебный день (будет менятся ежедневно)
 
 WEBHOOK_HOST = 'https://lesson-a9av.onrender.com'
 WEBHOOK_PATH = 'https://api.render.com/deploy/srv-cedm6ssgqg45htai72h0?key=iJvvyJAX_wc' #или пустое значение, если он слушает на стартовой странице.
@@ -20,8 +20,10 @@ def seconds():
     while True:
         global day_for_school
         time.sleep(1)
-        if time.localtime().tm_hour == 0 and time.localtime().tm_min == 0 and time.localtime().tm_sec == 0 and day_for_school < 7:
+        if time.localtime().tm_hour == 0 and time.localtime().tm_min == 0 and time.localtime().tm_sec == 0:
             day_for_school += 1
+        elif day_for_school > 7:
+            day_for_school = 1
 
 class homework(StatesGroup):
     geog1 = State()
