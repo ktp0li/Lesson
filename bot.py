@@ -6,10 +6,6 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import time
 import threading
 
-
-
-
-
 bot = Bot('121212') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
@@ -57,6 +53,72 @@ async def lessons_day(message: types.Message, state=None):
     if message.text == 'География' and day_for_school == 1:
         await message.answer('Запиши домашнее задание')
         await homework.frs.set()
+    elif message.text == 'Химия' and day_for_school == 1:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Английский' and day_for_school == 1:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Доп. Русский':
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'История' and day_for_school == 2:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Литература' and day_for_school == 2:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Геометрия' and day_for_school == 2:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Английский' and day_for_school == 2:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Алгебра' and day_for_school == 3:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Английский' and day_for_school == 3:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Русский Язык' and day_for_school == 3:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'История' and day_for_school == 4:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Английский' and day_for_school == 4:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'ОБЖ' and day_for_school == 4:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Допю Информатика':
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Алгебра' and day_for_school == 5:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Обществознание' and day_for_school == 5:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Информатика' and day_for_school == 5:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Русский Язык' and day_for_school == 6:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Литература' and day_for_school == 6:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Биология' and day_for_school == 6:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Геометрия' and day_for_school == 6:
+        await message.answer('Запиши домашнее задание')
+
+    elif message.text == 'Английский' and day_for_school == 6:
+        await message.answer('Запиши домашнее задание')
+
 
 
 @dp.message_handler(state=homework.frs)
@@ -71,6 +133,7 @@ async def otvet(message: types.Message, state: FSMContext):
     lesson = data.get('lesson')
     await message.answer(f'Day={day_for_school}, word={lesson}')
     await state.finish()
+
 
 
 

@@ -20,10 +20,10 @@ monday_keyboard.add(one_monday_lesson, two_monday_lesson, three_monday_lesson, f
 
 
 tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-one_tuesday_lesson = KeyboardButton(text='Обществознание')
+one_tuesday_lesson = KeyboardButton(text='История')
 two_tuesday_lesson = KeyboardButton(text='Литра')
-three_tuesday_lesson = KeyboardButton(text='Литра')
-four_tuesday_lesson = KeyboardButton(text='Обществознание')
+three_tuesday_lesson = KeyboardButton(text='Лиература')
+four_tuesday_lesson = KeyboardButton(text='История')
 five_tuesday_lesson = KeyboardButton(text='Геометрия')
 six_tuesday_lesson = KeyboardButton(text='Английский')
 seven_tuesday_lesson = KeyboardButton(text='Английский')
@@ -54,7 +54,7 @@ thursday_keyboard.add(one_thursday_lesson, two_thursday_lesson, three_thursday_l
 
 friday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
 one_friday_lesson = KeyboardButton(text='Индивидуальный проект')
-two_friday_lesson = KeyboardButton(text='Алгебра (Электив)')
+two_friday_lesson = KeyboardButton(text='Алгебра')
 three_friday_lesson = KeyboardButton(text='Обществознание')
 four_friday_lesson = KeyboardButton(text='Обществознание')
 five_friday_lesson = KeyboardButton(text='Алгебра')
