@@ -7,12 +7,6 @@ dp = Dispatcher(bot) # Создание Диспетчера
 
 day_for_school = 1 # Учебный день (будет менятся ежедневно)
 
-
-
-
-
-
-
 @dp.message_handler(commands=(['start']))
 async def menu(message: types.Message):
     await message.answer(text=f'ты уже корячешься в этой школе {day_for_school} дней', reply_markup=update_date_keyborard)
