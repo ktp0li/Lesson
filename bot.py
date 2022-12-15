@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 
-bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен
+bot = Bot('123456') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
