@@ -6,7 +6,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import time
 import threading
 
-bot = Bot('121212') # Бот токен
+bot = Bot('ыуаыуауыа') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
@@ -20,7 +20,29 @@ def seconds():
             day_for_school += 1
 
 class homework(StatesGroup):
-    frs = State()
+    geog1 = State()
+    him1 = State()
+    angl1 = State()
+    doprussk = State()
+    istor2 = State()
+    litra2 = State()
+    geom2 = State()
+    angl2 = State()
+    algebra3 = State()
+    angl3 = State()
+    russk3 = State()
+    istor4 = State()
+    angl4 = State()
+    obz4 = State()
+    dopinf = State()
+    algebra5 = State()
+    obsh5 = State()
+    inf5 = State()
+    russk6 = State()
+    litra6 = State()
+    geom6 = State()
+    biolog6 = State()
+    angl6 = State()
 
 @dp.message_handler(commands=(['start']))
 async def menu(message: types.Message):
@@ -52,76 +74,77 @@ async def menu(message: types.Message):
 async def lessons_day(message: types.Message, state=None):
     if message.text == 'География' and day_for_school == 1:
         await message.answer('Запиши домашнее задание')
-        await homework.frs.set()
+        await homework.geog1.set()
     elif message.text == 'Химия' and day_for_school == 1:
         await message.answer('Запиши домашнее задание')
-
+        await homework.him1.set()
     elif message.text == 'Английский' and day_for_school == 1:
         await message.answer('Запиши домашнее задание')
-
+        await homework.angl1.set()
     elif message.text == 'Доп. Русский':
         await message.answer('Запиши домашнее задание')
-
+        await homework.doprussk.set()
     elif message.text == 'История' and day_for_school == 2:
         await message.answer('Запиши домашнее задание')
-
+        await homework.istor2.set()
     elif message.text == 'Литература' and day_for_school == 2:
         await message.answer('Запиши домашнее задание')
-
+        await homework.litra2.set()
     elif message.text == 'Геометрия' and day_for_school == 2:
         await message.answer('Запиши домашнее задание')
-
+        await homework.geom2.set()
     elif message.text == 'Английский' and day_for_school == 2:
         await message.answer('Запиши домашнее задание')
-
+        await homework.angl2.set()
     elif message.text == 'Алгебра' and day_for_school == 3:
         await message.answer('Запиши домашнее задание')
-
+        await homework.algebra3.set()
     elif message.text == 'Английский' and day_for_school == 3:
         await message.answer('Запиши домашнее задание')
-
+        await homework.angl3.set()
     elif message.text == 'Русский Язык' and day_for_school == 3:
         await message.answer('Запиши домашнее задание')
-
+        await homework.russk3.set()
     elif message.text == 'История' and day_for_school == 4:
         await message.answer('Запиши домашнее задание')
-
+        await homework.istor4.set()
     elif message.text == 'Английский' and day_for_school == 4:
         await message.answer('Запиши домашнее задание')
-
+        await homework.angl4.set()
     elif message.text == 'ОБЖ' and day_for_school == 4:
         await message.answer('Запиши домашнее задание')
-
+        await homework.obz4.set()
     elif message.text == 'Допю Информатика':
         await message.answer('Запиши домашнее задание')
-
+        await homework.dopinf.set()
     elif message.text == 'Алгебра' and day_for_school == 5:
         await message.answer('Запиши домашнее задание')
-
+        await homework.algebra5.set()
     elif message.text == 'Обществознание' and day_for_school == 5:
         await message.answer('Запиши домашнее задание')
-
+        await homework.obsh5.set()
     elif message.text == 'Информатика' and day_for_school == 5:
         await message.answer('Запиши домашнее задание')
-
+        await homework.inf5.set()
     elif message.text == 'Русский Язык' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
-
+        await homework.russk6.set()
     elif message.text == 'Литература' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
-
+        await homework.litra6.set()
     elif message.text == 'Биология' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
-
+        await homework.biolog6.set()
     elif message.text == 'Геометрия' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
-
+        await homework.geom6.set()
     elif message.text == 'Английский' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
+        await homework.angl6.set()
 
 
 
-@dp.message_handler(state=homework.frs)
+@dp.message_handler(state=homework.geog1)
 async def otvet(message: types.Message, state: FSMContext):
     lesson = message.text
     await state.update_data(
@@ -134,8 +157,291 @@ async def otvet(message: types.Message, state: FSMContext):
     await message.answer(f'Day={day_for_school}, word={lesson}')
     await state.finish()
 
+@dp.message_handler(state=homework.him1)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
 
+@dp.message_handler(state=homework.angl1)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
 
+@dp.message_handler(state=homework.doprussk)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.istor2)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.litra2)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.angl2)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.geom2)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.algebra3)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.angl3)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.russk3)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.istor4)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.angl4)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.obz4)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.algebra5)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.obsh5)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.algebra5)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.inf5)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.russk6)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.litra6)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.geom6)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.biolog6)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
+
+@dp.message_handler(state=homework.angl6)
+async def otvet(message: types.Message, state: FSMContext):
+    lesson = message.text
+    await state.update_data(
+        {
+            'lesson': lesson
+        }
+    )
+    data = await state.get_data()
+    lesson = data.get('lesson')
+    await message.answer(f'Day={day_for_school}, word={lesson}')
+    await state.finish()
 
 threading.Thread(target=seconds).start()
 

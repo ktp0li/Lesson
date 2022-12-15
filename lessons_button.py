@@ -21,7 +21,7 @@ monday_keyboard.add(one_monday_lesson, two_monday_lesson, three_monday_lesson, f
 
 tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
 one_tuesday_lesson = KeyboardButton(text='История')
-two_tuesday_lesson = KeyboardButton(text='Литра')
+two_tuesday_lesson = KeyboardButton(text='Литература')
 three_tuesday_lesson = KeyboardButton(text='Лиература')
 four_tuesday_lesson = KeyboardButton(text='История')
 five_tuesday_lesson = KeyboardButton(text='Геометрия')
