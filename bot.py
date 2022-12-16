@@ -1,20 +1,101 @@
 from aiogram import Bot, executor, Dispatcher, types
-from lessons_button import *
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 import time
 import threading
+
+
+geog1_obj = ''
+him1_obj = ''
+angl1_obj = ''
+doprussk_obj = ''
+istor2_obj = ''
+litra2_obj = ''
+geom2_obj = ''
+angl2_obj = ''
+algebra3_obj = ''
+angl3_obj = ''
+russk3_obj = ''
+istor4_obj = ''
+angl4_obj = ''
+obz4_obj = ''
+dopinf_obj = ''
+algebra5_obj = ''
+obsh5_obj = ''
+inf5_obj = ''
+russk6_obj = ''
+litra6_obj = ''
+geom6_obj = ''
+biolog6_obj = ''
+angl6_obj = ''
+
+monday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True) # расписание на понедельник
+
+
+three_monday_lesson = KeyboardButton(text='География')
+four_monday_lesson = KeyboardButton(text='Химия')
+update_button = KeyboardButton('Обновить')
+clear_day = KeyboardButton('Очистить день')
+six_monday_lesson = KeyboardButton(text='Английский')
+additionally_monday_lesson = KeyboardButton(text='Доп. Русский')
+monday_keyboard.add(three_monday_lesson, four_monday_lesson, six_monday_lesson, additionally_monday_lesson, update_button, clear_day)
+
+
+tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+one_tuesday_lesson = KeyboardButton(text='История')
+two_tuesday_lesson = KeyboardButton(text='Литература')
+five_tuesday_lesson = KeyboardButton(text='Геометрия')
+six_tuesday_lesson = KeyboardButton(text='Английский')
+update_button = KeyboardButton('Обновить')
+clear_day = KeyboardButton('Очистить день')
+tuesday_keyboard.add(one_tuesday_lesson, two_tuesday_lesson,  five_tuesday_lesson, six_tuesday_lesson, update_button, clear_day)
+
+
+wednesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+one_wednesday_lesson = KeyboardButton(text='Алгебра')
+two_wednesday_lesson = KeyboardButton(text='Английский')
+three_wednesday_lesson = KeyboardButton(text='Русский Язык')
+clear_day = KeyboardButton('Очистить день')
+
+wednesday_keyboard.add(one_wednesday_lesson, two_wednesday_lesson, three_wednesday_lesson, update_button, clear_day)
+
+
+thursday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+two_thursday_lesson = KeyboardButton(text='История')
+three_thursday_lesson = KeyboardButton(text='Английский')
+five_thursday_lesson = KeyboardButton(text='ОБЖ')
+additionally_thursday_lesson = KeyboardButton(text='Доп. Информатика')
+update_button = KeyboardButton('Обновить')
+clear_day = KeyboardButton('Очистить день')
+thursday_keyboard.add(two_thursday_lesson, three_thursday_lesson, five_thursday_lesson, update_button, clear_day)
+
+
+friday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+two_friday_lesson = KeyboardButton(text='Алгебра')
+four_friday_lesson = KeyboardButton(text='Обществознание')
+six_friday_lesson = KeyboardButton(text='Информатика')
+update_button = KeyboardButton('Обновить')
+friday_keyboard.add(two_friday_lesson, four_friday_lesson, six_friday_lesson, update_button, clear_day)
+
+saturday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+one_saturday_lesson = KeyboardButton(text='Русский Язык')
+two_saturday_lesson = KeyboardButton(text='Литература')
+three_saturday_lesson = KeyboardButton(text='Геометрия')
+four_saturday_lesson = KeyboardButton(text='Биология')
+five_saturday_lesson = KeyboardButton(text='Английский')
+clear_day = KeyboardButton('Очистить день')
+update_button = KeyboardButton('Обновить')
+saturday_keyboard.add(one_saturday_lesson, two_saturday_lesson, three_saturday_lesson, four_saturday_lesson, five_saturday_lesson, update_button, clear_day)
+
 
 bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448') # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage) # Создание Диспетчера
 
-day_for_school = 2 # Учебный день (будет менятся ежедневно)
+day_for_school = 1 # Учебный день (будет менятся ежедневно)
 
-WEBHOOK_HOST = 'https://lesson-a9av.onrender.com'
-WEBHOOK_PATH = 'https://api.render.com/deploy/srv-cedm6ssgqg45htai72h0?key=iJvvyJAX_wc' #или пустое значение, если он слушает на стартовой странице.
-WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
 def seconds():
     while True:
@@ -49,6 +130,7 @@ class homework(StatesGroup):
     geom6 = State()
     biolog6 = State()
     angl6 = State()
+    clear_days = State()
 
 @dp.message_handler(commands=(['start']))
 async def menu(message: types.Message):
@@ -147,6 +229,9 @@ async def lessons_day(message: types.Message, state=None):
     elif message.text == 'Английский' and day_for_school == 6:
         await message.answer('Запиши домашнее задание')
         await homework.angl6.set()
+    elif message.text == 'Очистить день':
+        await message.answer('Выбери день')
+        await homework.clear_days.set()
     elif message.text == 'Обновить':
         if day_for_school == 1:
             await message.answer('''Расписание на понедельник
@@ -212,7 +297,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    geog1_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.him1)
@@ -225,7 +311,9 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    him1_obj = lesson
+    await message.answer('Готово!')
+
     await state.finish()
 
 @dp.message_handler(state=homework.angl1)
@@ -238,7 +326,9 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    angl1_obj = lesson
+    await message.answer('Готово!')
+
     await state.finish()
 
 @dp.message_handler(state=homework.doprussk)
@@ -251,7 +341,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    doprussk_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.istor2)
@@ -264,7 +355,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    istor2_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.litra2)
@@ -277,7 +369,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    litra2_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.angl2)
@@ -290,7 +383,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    angl2_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.geom2)
@@ -303,7 +397,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    geom2_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.algebra3)
@@ -316,7 +411,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    algebra3_obj= lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.angl3)
@@ -329,7 +425,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    angl3_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.russk3)
@@ -342,7 +439,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    russk3_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.istor4)
@@ -355,7 +453,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    istor4_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.angl4)
@@ -368,7 +467,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    angl4_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.obz4)
@@ -381,7 +481,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    obz4_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.algebra5)
@@ -394,7 +495,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    algebra5_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.obsh5)
@@ -407,7 +509,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    obsh5_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.algebra5)
@@ -420,7 +523,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    algebra5_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.inf5)
@@ -433,7 +537,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    inf5_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.russk6)
@@ -446,7 +551,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    russk6_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.litra6)
@@ -459,7 +565,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    litra6_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.geom6)
@@ -472,7 +579,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    geom6_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.biolog6)
@@ -485,7 +593,8 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    biolog6_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
 @dp.message_handler(state=homework.angl6)
@@ -498,9 +607,54 @@ async def otvet(message: types.Message, state: FSMContext):
     )
     data = await state.get_data()
     lesson = data.get('lesson')
-    await message.answer(f'Day={day_for_school}, word={lesson}')
+    angl6_obj = lesson
+    await message.answer('Готово!')
     await state.finish()
 
+@dp.message_handler(state=homework.clear_days)
+async def otvet(message: types.Message, state: FSMContext):
+    day = message.text
+    await state.update_data(
+        {
+            'day': day
+        }
+    )
+    data = await state.get_data()
+    day = data.get('day')
+    if day == 'Понедельник':
+        geog1_obj = ''
+        him1_obj = ''
+        angl1_obj = ''
+        doprussk_obj = ''
+    elif day == 'Вторник':
+        istor2_obj = ''
+        litra2_obj = ''
+        geom2_obj = ''
+        angl2_obj = ''
+    elif day == 'Среда':
+        algebra3_obj = ''
+        angl3_obj = ''
+        russk3_obj = ''
+    elif day == 'Четверг':
+        istor4_obj = ''
+        angl4_obj = ''
+        obz4_obj = ''
+        dopinf_obj = ''
+    elif day == 'Пятница':
+        algebra5_obj = ''
+        obsh5_obj = ''
+        inf5_obj = ''
+    elif day == 'Суббота':
+        russk6_obj = ''
+        litra6_obj = ''
+        geom6_obj = ''
+        biolog6_obj = ''
+        angl6_obj = ''
+
+
+
+    await message.answer(f'{day} очистен')
+    await state.finish()
 threading.Thread(target=seconds).start()
 
 
