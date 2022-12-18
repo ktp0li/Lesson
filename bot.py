@@ -5,6 +5,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 import time
 import threading
+import keep_alive
 
 geog1_obj = ''
 him1_obj = ''
@@ -29,6 +30,14 @@ litra6_obj = ''
 geom6_obj = ''
 biolog6_obj = ''
 angl6_obj = ''
+
+
+update_keyboardss = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+update_button = KeyboardButton('Обновить')
+update_keyboardss.add(update_button)
+
+
+
 
 monday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # расписание на понедельник
 three_monday_lesson = KeyboardButton(text='География')
@@ -103,11 +112,11 @@ saturday = KeyboardButton('Суббота')
 update_button = KeyboardButton('Обновить')
 all_days_keyboard.add(monday, tuesday, wednesday, thursday, friday, saturday, update_button)
 
-bot = Bot('5733141109:AAEuwSAskLBqyKQtChRXvSw0ixkMgy2E448')  # Бот токен
+bot = Bot('This is token man')  # Бот токен
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)  # Создание Диспетчера
 
-day_for_school = 1  # Учебный день (будет менятся ежедневно)
+day_for_school = 7  # Учебный день (будет менятся ежедневно)
 
 
 def seconds():
@@ -306,6 +315,8 @@ async def lessons_day(message: types.Message, state=None):
             Биология
             Английский
             Физра''', reply_markup=saturday_keyboard)
+        elif day_for_school == 7:
+            await message.answer('Сегодня отдых', reply_markup=update_keyboardss)
 
 
     elif message.text == 'Вывести ДЗ':
@@ -822,5 +833,7 @@ async def otvet(message: types.Message, state: FSMContext):
 
 threading.Thread(target=seconds).start()
 
-if __name__ == '__main__':
-    executor.start_polling(dispatcher=dp)
+
+keep_alive.keep_alive()
+
+executor.start_polling(dispatcher=dp)
