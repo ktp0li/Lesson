@@ -1,7 +1,7 @@
-from flask import flask
+from flask import Flask
 from threading import Thread
 
-app = flask('app')
+app = Flask('app')
 @app.route('/')
 def maun():
     return '1234'
