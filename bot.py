@@ -45,13 +45,16 @@ schedule = {'monday': ['География', 'Химия', 'Английский
             'friday': ['Алгебра', 'Обществознание', 'Информатика'],
             'saturday': ['География', 'Литература', 'Геометрия', 'Биология', 'Английский']}
 
+keyboards = {'monday': '', 'tuesday': '', 'wednesday': '',
+             'thursday': '', 'friday': '', 'saturday': ''}
+
 
 def keyboard_by_day():
     for day, lessons in schedule.items():
-        globals()[day + '_keyboard'] = ReplyKeyboardMarkup(
+        keyboards[day] = ReplyKeyboardMarkup(
                 row_width=1, resize_keyboard=True)
-        globals()[day + '_keyboard'].add(
-                (KeyboardButton(text=text) for text in lessons),
+        keyboards[day].add(
+                *(KeyboardButton(text=text) for text in lessons),
                 update_button, clear_day, what_homework)
 
 
@@ -225,7 +228,7 @@ async def lessons_day(message: types.Message, state=None):
             Химия
             Шведский
             Английский
-            Доп. Русский''', reply_markup=monday_keyboard)
+            Доп. Русский''', reply_markup=keyboards['monday'])
         elif day_for_school == 2:
             await message.answer('''Расписание на вторник
             История
@@ -234,7 +237,7 @@ async def lessons_day(message: types.Message, state=None):
             История
             Геометрия
             Английский
-            Английский''', reply_markup=tuesday_keyboard)
+            Английский''', reply_markup=keyboards['tuesday'])
         elif day_for_school == 3:
             await message.answer('''Расписание на среду
             Алгебра
@@ -243,7 +246,7 @@ async def lessons_day(message: types.Message, state=None):
             Русский Язык
             Шведский
             Физика
-            Физра''', reply_markup=wednesday_keyboard)
+            Физра''', reply_markup=keyboards['wednesday'])
         elif day_for_school == 4:
             await message.answer('''Расписание на четверг
             Физра
@@ -252,7 +255,7 @@ async def lessons_day(message: types.Message, state=None):
             Шведский
             ОБЖ
             Физика
-            Доп. Информатика''', reply_markup=thursday_keyboard)
+            Доп. Информатика''', reply_markup=keyboards['thursday'])
         elif day_for_school == 5:
             await message.answer('''Расписание на пятницу
             Индивидульный проект
@@ -260,7 +263,7 @@ async def lessons_day(message: types.Message, state=None):
             Обществознание
             Обществознание
             Алгебра
-            Информатика''', reply_markup=friday_keyboard)
+            Информатика''', reply_markup=keyboards['friday'])
         elif day_for_school == 6:
             await message.answer('''Расписание на субботу
             Русский Язык
@@ -268,7 +271,7 @@ async def lessons_day(message: types.Message, state=None):
             Геометрия
             Биология
             Английский
-            Физра''', reply_markup=saturday_keyboard)
+            Физра''', reply_markup=keyboards['saturday'])
         elif day_for_school == 7:
             await message.answer('Сегодня отдых', reply_markup=update_keyboardss)
 
