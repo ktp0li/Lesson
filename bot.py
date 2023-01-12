@@ -35,72 +35,27 @@ angl6_obj = ''
 update_keyboardss = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
 update_button = KeyboardButton('Обновить')
 update_keyboardss.add(update_button)
-
-
-
-
-monday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)  # расписание на понедельник
-three_monday_lesson = KeyboardButton(text='География')
-four_monday_lesson = KeyboardButton(text='Химия')
-update_button = KeyboardButton('Обновить')
-clear_day = KeyboardButton('Очистить день')
-six_monday_lesson = KeyboardButton(text='Английский')
-additionally_monday_lesson = KeyboardButton(text='Доп. Русский')
-what_homework = KeyboardButton('Вывести ДЗ')
-monday_keyboard.add(three_monday_lesson, four_monday_lesson, six_monday_lesson, additionally_monday_lesson,
-                    update_button, clear_day, what_homework)
-
-tuesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-one_tuesday_lesson = KeyboardButton(text='История')
-two_tuesday_lesson = KeyboardButton(text='Литература')
-five_tuesday_lesson = KeyboardButton(text='Геометрия')
-six_tuesday_lesson = KeyboardButton(text='Английский')
-update_button = KeyboardButton('Обновить')
-clear_day = KeyboardButton('Очистить день')
-what_homework = KeyboardButton('Вывести ДЗ')
-tuesday_keyboard.add(one_tuesday_lesson, two_tuesday_lesson, five_tuesday_lesson, six_tuesday_lesson, update_button,
-                     clear_day, what_homework)
-
-wednesday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-one_wednesday_lesson = KeyboardButton(text='Алгебра')
-two_wednesday_lesson = KeyboardButton(text='Английский')
-three_wednesday_lesson = KeyboardButton(text='Русский Язык')
 clear_day = KeyboardButton('Очистить день')
 what_homework = KeyboardButton('Вывести ДЗ')
 
-wednesday_keyboard.add(one_wednesday_lesson, two_wednesday_lesson, three_wednesday_lesson, update_button, clear_day,
-                       what_homework)
+schedule = {'monday': ['География', 'Химия', 'Английский', 'Доп. Русский'],
+            'tuesday': ['История', 'Литература', 'Геометрия', 'Английский'],
+            'wednesday': ['Алгебра', 'Английский', 'Русский Язык'],
+            'thursday': ['История', 'Aнглийский', 'ОБЖ', 'Доп. Информатика'],
+            'friday': ['Алгебра', 'Обществознание', 'Информатика'],
+            'saturday': ['География', 'Литература', 'Геометрия', 'Биология', 'Английский']}
 
-thursday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-two_thursday_lesson = KeyboardButton(text='История')
-three_thursday_lesson = KeyboardButton(text='Английский')
-five_thursday_lesson = KeyboardButton(text='ОБЖ')
-additionally_thursday_lesson = KeyboardButton(text='Доп. Информатика')
-update_button = KeyboardButton('Обновить')
-clear_day = KeyboardButton('Очистить день')
-what_homework = KeyboardButton('Вывести ДЗ')
-thursday_keyboard.add(two_thursday_lesson, three_thursday_lesson, five_thursday_lesson, update_button, clear_day,
-                      what_homework)
 
-friday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-two_friday_lesson = KeyboardButton(text='Алгебра')
-four_friday_lesson = KeyboardButton(text='Обществознание')
-six_friday_lesson = KeyboardButton(text='Информатика')
-update_button = KeyboardButton('Обновить')
-what_homework = KeyboardButton('Вывести ДЗ')
-friday_keyboard.add(two_friday_lesson, four_friday_lesson, six_friday_lesson, update_button, clear_day, what_homework)
+def keyboard_by_day():
+    for day, lessons in schedule.items():
+        globals()[day + '_keyboard'] = ReplyKeyboardMarkup(
+                row_width=1, resize_keyboard=True)
+        globals()[day + '_keyboard'].add(
+                (KeyboardButton(text=text) for text in lessons),
+                update_button, clear_day, what_homework)
 
-saturday_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-one_saturday_lesson = KeyboardButton(text='Русский Язык')
-two_saturday_lesson = KeyboardButton(text='Литература')
-three_saturday_lesson = KeyboardButton(text='Геометрия')
-four_saturday_lesson = KeyboardButton(text='Биология')
-five_saturday_lesson = KeyboardButton(text='Английский')
-clear_day = KeyboardButton('Очистить день')
-update_button = KeyboardButton('Обновить')
-what_homework = KeyboardButton('Вывести ДЗ')
-saturday_keyboard.add(one_saturday_lesson, two_saturday_lesson, three_saturday_lesson, four_saturday_lesson,
-                      five_saturday_lesson, update_button, clear_day, what_homework)
+
+keyboard_by_day()
 
 all_days_keyboard = ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
 monday = KeyboardButton('Понедельник')
@@ -109,7 +64,6 @@ wednesday = KeyboardButton('Среда')
 thursday = KeyboardButton('Четверг')
 friday = KeyboardButton('Пятница')
 saturday = KeyboardButton('Суббота')
-update_button = KeyboardButton('Обновить')
 all_days_keyboard.add(monday, tuesday, wednesday, thursday, friday, saturday, update_button)
 
 bot = Bot('This is token man')  # Бот токен
